@@ -1,8 +1,11 @@
-name: "my-website"
+name: " "
+output_dir: "docs"
 navbar:
-  title: "My Website"
+  title: "Como Vamos"
   left:
-    - text: "Home"
+    - text: "Estudiantes"
       href: index.html
-    - text: "About"
+    - text: "Empresas"
       href: about.html
+    - text: "Detalles"
+      href: detalles.html
