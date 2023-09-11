@@ -1,0 +1,52 @@
+---
+title: "¿Cómo Vamos?"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = NA)
+
+library(readxl)
+library(knitr)
+library(kableExtra)
+library(dplyr)
+matriculados <- read_excel("data/matriculados.xlsx")
+listado1 <- read_excel("data/listado-estudiantes-javerianacaliinterniships5.xlsx")
+matriculados20232 = subset(matriculados,matriculados$Periodo == "20232")
+
+listado1$cruce = ifelse(listado1$ID %in% matriculados$ID, 1, 0)
+
+
+listado1$pendiente= as.numeric(listado1$Empresa=="Pendiente")
+listado1$activos=as.numeric(listado1$Estado != "Pausado")
+listado1$pausado=as.numeric(listado1$Estado == "Pausado")
+
+t0=table(matriculados20232$"Programa Academico") %>% 
+            as.data.frame()# matriculadis
+t1=table(listado1$Carrera ,listado1$cruce)%>% 
+  as.data.frame.matrix()   #  falta matric /programa
+
+t2= table(listado1$Carrera,listado1$pendiente)%>% 
+  as.data.frame.matrix() # ubicados /pausados
+
+t3=  table(listado1$Carrera, listado1$activos) %>% 
+  as.data.frame.matrix() # programa
+
+t4= table(listado1$Carrera,listado1$pausado)%>% 
+  as.data.frame.matrix() # ubicados /pausados
+
+
+comovamos = cbind(t0,t1,t2,t3)
+comovamos =comovamos[, c(1,2,4,3,5,7)]
+
+```
+
+
+```{r,echo=FALSE}
+
+
+#colnames(comovamos)= c("Carrera","Matriculados","Programa Prácticas","Falta Matrícula","Ubicados","Rotando")
+tabla = kable(comovamos,format = "html") %>%
+            kable_styling(bootstrap_options = "striped", full_width = FALSE)
+tabla
+```
+

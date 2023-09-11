@@ -1,5 +1,77 @@
 ---
-title: "About This Website"
+title: "Tutores"
 ---
 
-More about this website.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = NA)
+library(readxl)
+library(knitr)
+library(kableExtra)
+library(dplyr)
+
+# ... (código previo, como el que proporcionaste)
+
+
+matriculados <- read_excel("data/matriculados.xlsx")
+names(matriculados)= c("ID", "Periodo", "Programa Academico")
+listado1 <- read_excel("data/listado-estudiantes-javerianacaliinterniships5.xlsx")
+names(listado1) = c("ID", "Nombre", "Correo","Teléfono","Dirección","Carrera",          
+                    "Modalidad", "Ubicación", "Asignado", "Empresa","Oferta",
+                    "Estado", "Tutor")
+matriculados20232 = subset(matriculados,matriculados$Periodo == "20232")
+
+
+listado1$cruce = ifelse(listado1$ID %in% matriculados$ID, 1, 0)
+listado1$pendiente= as.numeric(listado1$Empresa=="Pendiente") # rotando
+listado1$activos=as.numeric(listado1$Estado != "Pausado") # activo
+listado1$pausado=as.numeric(listado1$Estado == "Pausado") # pausado
+```
+
+<br/>
+
+```{r, echo=FALSE}
+library(dplyr)
+library(knitr)
+library(kableExtra)
+
+# Crear la tabla tutores20232
+tutores20232 <- table(listado1$Tutor) %>%
+  as.data.frame()
+names(tutores20232) <- c("Tutor", "Número de estudiantes")
+
+# Formatear la tabla con kable y kableExtra
+tabla_formateada <- tutores20232 %>%
+  kable(format = "html", escape = FALSE, col.names = c("Tutor", "Número de estudiantes")) %>%
+  kable_styling("striped", full_width = FALSE) %>%
+  row_spec(0, bold = TRUE)
+
+tabla_formateada
+
+```
+
+<br/>
+<br/>
+
+```{r, echo=FALSE}
+
+data=listado1
+# Supongamos que tu DataFrame se llama "data"
+tutores <- unique(data$Tutor)
+
+# Crear una lista de listas de nombres de estudiantes por tutor
+listado_tutores <- lapply(tutores, function(tutor) {
+  nombres_estudiantes <- data[data$Tutor == tutor, "Nombre"]
+  return(list(Tutor = tutor, Nombres = nombres_estudiantes))
+})
+
+# Imprimir el listado de tutores y nombres de estudiantes
+for (lista in listado_tutores) {
+  cat("Tutor:", lista$Tutor, "\n")
+  cat("Nombres de Estudiantes:\n")
+  cat(paste(lista$Nombres, collapse = "\n"), "\n\n")
+}
+
+
+```
+

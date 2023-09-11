@@ -1,9 +1,102 @@
 ---
-title: "Como Vamos"
+title: "¿Cómo Vamos?"
 ---
 
-Hello, Website!
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = NA)
+library(readxl)
+library(knitr)
+library(kableExtra)
+library(dplyr)
 
-For more information about simple R Markdown websites, please read the documentation at https://bookdown.org/yihui/rmarkdown/rmarkdown-site.html.
+# ... (código previo, como el que proporcionaste)
 
-Please also note that simple R Markdown sites are _not_ based on **blogdown**. They are probably good for websites with only a few Rmd documents. For larger-scale and more sophisticated websites (such as blogs), you may want to use **blogdown** instead: https://github.com/rstudio/blogdown.
+
+matriculados <- read_excel("data/matriculados.xlsx")
+names(matriculados)= c("ID", "Periodo", "Programa Academico")
+listado1 <- read_excel("data/listado-estudiantes-javerianacaliinterniships5.xlsx")
+names(listado1) = c("ID", "Nombre", "Correo","Teléfono","Dirección","Carrera",          
+                    "Modalidad", "Ubicación", "Asignado", "Empresa","Oferta",
+                    "Estado", "Tutor")
+matriculados20232 = subset(matriculados,matriculados$Periodo == "20232")
+
+
+listado1$cruce = ifelse(listado1$ID %in% matriculados$ID, 1, 0)
+listado1$pendiente= as.numeric(listado1$Empresa=="Pendiente") # rotando
+listado1$activos=as.numeric(listado1$Estado != "Pausado") # activo
+listado1$pausado=as.numeric(listado1$Estado == "Pausado") # pausado
+
+t0=table(matriculados20232$"Programa Academico") %>%
+  as.data.frame()# matriculados
+Carreras = t0[,1]
+Matriculados = t0[,2]
+
+t1=table(listado1$Carrera ,listado1$cruce) %>%
+  as.data.frame.matrix() #  falta matric /programa
+Programa = t1[,2]
+
+t2= table(listado1$Carrera,listado1$pendiente) %>%
+  as.data.frame.matrix()  # ubicados /pausados
+Ubicados = t2[,1]
+
+t3=  table(listado1$Carrera, listado1$activos) %>%
+  as.data.frame.matrix()# programa
+Programa = t3[,2]
+
+t4 = table(listado1$Carrera, listado1$pausado) %>%
+  as.data.frame.matrix()# programa
+
+t5 = table(listado1$Carrera, listado1$pendiente) %>%
+  as.data.frame.matrix()# Rotando
+
+
+FaltanM = t1[,1]
+Rotando = rep(0,22)
+Pausado = t4[,2]
+Rotando = t5[,2]
+# ubicados = paste(round(((1-pendiente/programa)*100),0), "%")
+# ubicados = c(ubicados, " ")
+
+comovamos = data.frame(Carreras,
+                       Matriculados,
+                       Programa,
+                       FaltanM,
+                       Ubicados,
+                       Rotando,
+                       Pausado)
+comovamos
+
+
+
+
+
+# Calcula la suma por columnas
+total = colSums(comovamos[, 2:7])
+
+# Crear un nuevo registro como un data.frame
+totales <- data.frame(
+  Carreras = "Total", 
+  Matriculados = total[1],
+  Programa = total[2],
+  FaltanM = total[3],
+  Ubicados = total[4],
+  Rotando = total[5],
+  Pausado = total[6])
+
+# Agregar el nuevo registro a comovamos usando bind_rows
+comovamos <- bind_rows(comovamos, totales)
+```
+
+
+```{r, echo = FALSE}
+# Imprimir la tabla elegante usando kable()
+comovamos %>%
+  kable(format = "html", escape = FALSE, row.names = FALSE) %>%
+  kable_styling("striped", full_width = FALSE) %>%
+  row_spec(nrow(comovamos), bold = TRUE)
+
+
+```
+
+
+
