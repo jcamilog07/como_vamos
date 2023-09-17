@@ -9,10 +9,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Juan Gonzalez" />
 
-<meta name="date" content="2023-08-25" />
+<meta name="date" content="2023-09-17" />
 
-<title>Detalles</title>
+<title>Como Vamos</title>
 
 <script src="site_libs/header-attrs-2.17/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -264,12 +265,35 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Detalles</h1>
-<h4 class="date">2023-08-25</h4>
+<h1 class="title toc-ignore">Como Vamos</h1>
+<h4 class="author">Juan Gonzalez</h4>
+<h4 class="date">2023-09-17</h4>
 
 </div>
 
 
+<p>{r setup, include=FALSE} knitr::opts_chunk$set(echo = TRUE)</p>
+<p>{r, echo=FALSE, warning=FALSE, message=FALSE} # Instala y carga el
+paquete formattable si aún no lo has hecho #
+install.packages(“formattable”) library(formattable)</p>
+<div id="tu-conjunto-de-datos" class="section level1">
+<h1>Tu conjunto de datos</h1>
+<p>datos &lt;- data.frame( Carrera = c(“Administración de Empresas”,
+“Arquitectura”, “Artes Visuales”), Matriculados = c(48, 36, 13),
+Ubicados = c(38, 19, 8), Rotando = c(1, 1, 4), Aplazados = c(1, 1, 3),
+Porcentaje_Ubicacion = c(97, 95, 67) )</p>
+</div>
+<div id="crear-la-tabla-formateada" class="section level1">
+<h1>Crear la tabla formateada</h1>
+<p>tabla_formateada &lt;- formattable(datos, list( Carrera =
+color_tile(“white”, “lightblue”), Matriculados =
+color_bar(“lightgreen”), Ubicados = color_bar(“lightgreen”), Rotando =
+color_bar(“red”), Aplazados = color_bar(“lightblue”),
+Porcentaje_Ubicacion = percent ))</p>
+</div>
+<div id="mostrar-la-tabla-formateada" class="section level1">
+<h1>Mostrar la tabla formateada</h1>
+<p>tabla_formateada</p>
 <div id="r-markdown" class="section level2">
 <h2>R Markdown</h2>
 <p>This is an R Markdown document. Markdown is a simple formatting
@@ -296,6 +320,7 @@ chunk like this:</p>
 <p>Note that the <code>echo = FALSE</code> parameter was added to the
 code chunk to prevent printing of the R code that generated the
 plot.</p>
+</div>
 </div>
 
 

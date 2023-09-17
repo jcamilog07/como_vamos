@@ -1,29 +1,43 @@
 ---
-title: "Detalles"
+title: "Como Vamos"
+author: "Juan Gonzalez"
+date: "2023-09-17"
 output: html_document
-date: "2023-08-25"
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# Instala y carga el paquete formattable si aún no lo has hecho
+# install.packages("formattable")
+library(formattable)
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+# Tu conjunto de datos
+datos <- data.frame(
+  Carrera = c("Administración de Empresas", "Arquitectura", "Artes Visuales"),
+  Matriculados = c(48, 36, 13),
+  Ubicados = c(38, 19, 8),
+  Rotando = c(1, 1, 4),
+  Aplazados = c(1, 1, 3),
+  Porcentaje_Ubicacion = c(97, 95, 67)
+)
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+# Crear la tabla formateada
+tabla_formateada <- formattable(datos, list(
+  Carrera = color_tile("white", "lightblue"),
+  Matriculados = color_bar("lightgreen"),
+  Ubicados = color_bar("lightgreen"),
+  Rotando = color_bar("red"),
+  Aplazados = color_bar("lightblue"),
+  Porcentaje_Ubicacion = percent
+))
 
-```{r cars}
-summary(cars)
+# Mostrar la tabla formateada
+tabla_formateada
 ```
 
-## Including Plots
 
-You can also embed plots, for example:
 
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
