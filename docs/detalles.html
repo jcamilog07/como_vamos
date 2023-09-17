@@ -15,7 +15,7 @@
 
 <title>Como Vamos</title>
 
-<script src="site_libs/header-attrs-2.17/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.24/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
@@ -248,6 +248,9 @@ $(document).ready(function () {
   <a href="index.html">Estudiantes</a>
 </li>
 <li>
+  <a href="ComoVamos.html">Reporte</a>
+</li>
+<li>
   <a href="about.html">Empresas</a>
 </li>
 <li>
@@ -272,56 +275,110 @@ $(document).ready(function () {
 </div>
 
 
-<p>{r setup, include=FALSE} knitr::opts_chunk$set(echo = TRUE)</p>
-<p>{r, echo=FALSE, warning=FALSE, message=FALSE} # Instala y carga el
-paquete formattable si aún no lo has hecho #
-install.packages(“formattable”) library(formattable)</p>
-<div id="tu-conjunto-de-datos" class="section level1">
-<h1>Tu conjunto de datos</h1>
-<p>datos &lt;- data.frame( Carrera = c(“Administración de Empresas”,
-“Arquitectura”, “Artes Visuales”), Matriculados = c(48, 36, 13),
-Ubicados = c(38, 19, 8), Rotando = c(1, 1, 4), Aplazados = c(1, 1, 3),
-Porcentaje_Ubicacion = c(97, 95, 67) )</p>
-</div>
-<div id="crear-la-tabla-formateada" class="section level1">
-<h1>Crear la tabla formateada</h1>
-<p>tabla_formateada &lt;- formattable(datos, list( Carrera =
-color_tile(“white”, “lightblue”), Matriculados =
-color_bar(“lightgreen”), Ubicados = color_bar(“lightgreen”), Rotando =
-color_bar(“red”), Aplazados = color_bar(“lightblue”),
-Porcentaje_Ubicacion = percent ))</p>
-</div>
-<div id="mostrar-la-tabla-formateada" class="section level1">
-<h1>Mostrar la tabla formateada</h1>
-<p>tabla_formateada</p>
-<div id="r-markdown" class="section level2">
-<h2>R Markdown</h2>
-<p>This is an R Markdown document. Markdown is a simple formatting
-syntax for authoring HTML, PDF, and MS Word documents. For more details
-on using R Markdown see <a href="http://rmarkdown.rstudio.com"
-class="uri">http://rmarkdown.rstudio.com</a>.</p>
-<p>When you click the <strong>Knit</strong> button a document will be
-generated that includes both content as well as the output of any
-embedded R code chunks within the document. You can embed an R code
-chunk like this:</p>
-<pre class="r"><code>summary(cars)</code></pre>
-<pre><code>##      speed           dist       
-##  Min.   : 4.0   Min.   :  2.00  
-##  1st Qu.:12.0   1st Qu.: 26.00  
-##  Median :15.0   Median : 36.00  
-##  Mean   :15.4   Mean   : 42.98  
-##  3rd Qu.:19.0   3rd Qu.: 56.00  
-##  Max.   :25.0   Max.   :120.00</code></pre>
-</div>
-<div id="including-plots" class="section level2">
-<h2>Including Plots</h2>
-<p>You can also embed plots, for example:</p>
-<p><img src="detalles_files/figure-html/pressure-1.png" width="672" /></p>
-<p>Note that the <code>echo = FALSE</code> parameter was added to the
-code chunk to prevent printing of the R code that generated the
-plot.</p>
-</div>
-</div>
+<table class="table table-condensed">
+<thead>
+<tr>
+<th style="text-align:right;">
+Carrera
+</th>
+<th style="text-align:right;">
+Matriculados
+</th>
+<th style="text-align:right;">
+Ubicados
+</th>
+<th style="text-align:right;">
+Rotando
+</th>
+<th style="text-align:right;">
+Aplazados
+</th>
+<th style="text-align:right;">
+Porcentaje_Ubicacion
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ffffff">Administración
+de Empresas</span>
+</td>
+<td style="text-align:right;">
+<span
+style="display: inline-block; direction: rtl; unicode-bidi: plaintext; border-radius: 4px; padding-right: 2px; background-color: lightgreen; width: 100.00%">48</span>
+</td>
+<td style="text-align:right;">
+<span
+style="display: inline-block; direction: rtl; unicode-bidi: plaintext; border-radius: 4px; padding-right: 2px; background-color: lightgreen; width: 100.00%">38</span>
+</td>
+<td style="text-align:right;">
+<span
+style="display: inline-block; direction: rtl; unicode-bidi: plaintext; border-radius: 4px; padding-right: 2px; background-color: red; width: 25.00%">1</span>
+</td>
+<td style="text-align:right;">
+<span
+style="display: inline-block; direction: rtl; unicode-bidi: plaintext; border-radius: 4px; padding-right: 2px; background-color: lightblue; width: 33.33%">1</span>
+</td>
+<td style="text-align:right;">
+9700.00%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ffffff">Arquitectura
+</span>
+</td>
+<td style="text-align:right;">
+<span
+style="display: inline-block; direction: rtl; unicode-bidi: plaintext; border-radius: 4px; padding-right: 2px; background-color: lightgreen; width: 75.00%">36</span>
+</td>
+<td style="text-align:right;">
+<span
+style="display: inline-block; direction: rtl; unicode-bidi: plaintext; border-radius: 4px; padding-right: 2px; background-color: lightgreen; width: 50.00%">19</span>
+</td>
+<td style="text-align:right;">
+<span
+style="display: inline-block; direction: rtl; unicode-bidi: plaintext; border-radius: 4px; padding-right: 2px; background-color: red; width: 25.00%">1</span>
+</td>
+<td style="text-align:right;">
+<span
+style="display: inline-block; direction: rtl; unicode-bidi: plaintext; border-radius: 4px; padding-right: 2px; background-color: lightblue; width: 33.33%">1</span>
+</td>
+<td style="text-align:right;">
+9500.00%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ffffff">Artes
+Visuales </span>
+</td>
+<td style="text-align:right;">
+<span
+style="display: inline-block; direction: rtl; unicode-bidi: plaintext; border-radius: 4px; padding-right: 2px; background-color: lightgreen; width: 27.08%">13</span>
+</td>
+<td style="text-align:right;">
+<span
+style="display: inline-block; direction: rtl; unicode-bidi: plaintext; border-radius: 4px; padding-right: 2px; background-color: lightgreen; width: 21.05%">8</span>
+</td>
+<td style="text-align:right;">
+<span
+style="display: inline-block; direction: rtl; unicode-bidi: plaintext; border-radius: 4px; padding-right: 2px; background-color: red; width: 100.00%">4</span>
+</td>
+<td style="text-align:right;">
+<span
+style="display: inline-block; direction: rtl; unicode-bidi: plaintext; border-radius: 4px; padding-right: 2px; background-color: lightblue; width: 100.00%">3</span>
+</td>
+<td style="text-align:right;">
+6700.00%
+</td>
+</tr>
+</tbody>
+</table>
 
 
 

@@ -5,6 +5,8 @@ navbar:
   left:
     - text: "Estudiantes"
       href: index.html
+    - text: "Reporte"
+      href: ComoVamos.html      
     - text: "Empresas"
       href: about.html
     - text: "Detalles"

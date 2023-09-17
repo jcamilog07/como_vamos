@@ -1,0 +1,45 @@
+---
+title: "¿Cómo Vamos?"
+author: "Oficina Institucional de Prácticas Estudiantiles"
+date: "Septiembre 18 del 2023"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+
+```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# Instala y carga el paquete formattable si aún no lo has hecho
+# install.packages("formattable")
+library(formattable)
+
+# Tu conjunto de datos
+datos <- data.frame(
+  Carrera = c("Administración de Empresas", "Arquitectura", "Artes Visuales","Biología","Ciencia Política","Comunicación","Contaduría Pública","Derecho","Diseño de Comunicación Visual","Economía","Filosofía","Finanzas","Ingeniería Civil","Ingeniería de Sistemas y Computación","Ingeniería Electrónica","Ingeniería Industrial","Ingeniería Mecánica","Matemáticas Aplicadas","Mercadeo","Negocios Internacionales","Nutrición y Dietética","Psicología","TOTAL"),
+  Matriculados = c(48, 36, 13,16,30,36,9,9,30,18,8,6,64,12,12,29,11,2,5,79,11,69,553),
+  Ubicados = c(38, 19, 8,12,23,30,9,7,22,15,2,5,46,11,9,29,8,2,4,66,11,68,444),
+  Rotando = c(1, 1, 4,4,2,0,0,0,1,1,1,0,6,0,0,0,0,0,0,7,0,1,29),
+  Aplazados = c(1, 1, 3,0,0,0,0,1,3,0,0,0,2,1,1,0,1,0,0,2,0,0,16),
+  Porcentaje_de_Ubicacion = c(.97, .95, .67,.75,.92,.100,.100,.100,.96,.94,.67,.100,.88,.100,.100,.100,.100,.100,.100,.90,.100,.99,.94)
+)
+
+# Crear la tabla formateada
+tabla_formateada <- formattable(datos, list(
+  Carrera = color_tile("white", "lightblue"),
+  Matriculados = color_bar("lightgreen"),
+  Ubicados = color_bar("lightgreen"),
+  Rotando = color_bar("red"),
+  Aplazados = color_bar("lightblue"),
+  Porcentaje_Ubicacion = percent,
+  TOTAL = color_tile("white")
+  
+))
+
+
+# Mostrar la tabla formateada
+tabla_formateada
+
+```
