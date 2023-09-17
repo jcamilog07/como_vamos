@@ -4,9 +4,9 @@ navbar:
   title: "Como Vamos"
   left:
     - text: "Estudiantes"
-      href: index.html
+      href: ComoVamos.html 
     - text: "Reporte"
-      href: ComoVamos.html      
+      href:  index.html    
     - text: "Empresas"
       href: about.html
     - text: "Detalles"
